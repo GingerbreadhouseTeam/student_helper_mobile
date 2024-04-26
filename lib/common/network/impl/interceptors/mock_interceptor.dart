@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:student_helper/common/network/impl/interceptors/map_interceptor.dart';
 
-import '../../../data/endpoints.dart';
+import '../../../data/endpoints/endpoints.dart';
 
 class MockInterceptor extends Interceptor {
   late Future _futureManifestLoaded;

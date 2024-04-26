@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:student_helper/common/utils/context_extensions.dart';
+import 'package:student_helper/features/bottom_nav_bar/widget/bottom_nav_bar_item.dart';
 import 'package:student_helper/features/widgets/custom_app_bar.dart';
 
 import '../../generated/assets.gen.dart';
@@ -37,6 +38,43 @@ class BottomNavBarView extends HookConsumerWidget {
           physics: const NeverScrollableScrollPhysics(),
           controller: tabPage.controller,
           children: [for (final stack in tabPage.stacks) PageStackNavigator(stack: stack)]
+      ),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: context.colors.tertiary,
+          borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(12),
+              topRight: Radius.circular(12),
+          )
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 23.w),
+          child: Row(
+            children: [
+              BottomNavBarItem(
+                  image: Assets.images.icHome.svg(),
+                  isSelected: tabPage.index == 0,
+                  onTap: () {
+                    tabPage.controller.animateTo(0);
+                  }
+              ),
+              BottomNavBarItem(
+                  image: Assets.images.icBook.svg(),
+                  isSelected: tabPage.index == 1,
+                  onTap: () {
+                    tabPage.controller.animateTo(1);
+                  }
+              ),
+              BottomNavBarItem(
+                  image: Assets.images.icCalendar.svg(),
+                  isSelected: tabPage.index == 2,
+                  onTap: () {
+                    tabPage.controller.animateTo(2);
+                  }
+              )
+            ],
+          ),
+        ),
       ),
 
     );

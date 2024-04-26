@@ -34,9 +34,7 @@ class CAppBar extends HookConsumerWidget implements PreferredSizeWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return AppBar(
         backgroundColor: backgroundColor ?? context.colors.tertiary,
-        title: Center(
-          child: title,
-        ),
+        title: title,
         actions: actions,
         elevation: 0,
         leading: Navigator.of(context).canPop()
