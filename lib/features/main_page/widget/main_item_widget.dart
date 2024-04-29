@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:path/path.dart';
 import 'package:student_helper/common/domain/model/main_item/main_item.dart';
 import 'package:student_helper/common/utils/context_extensions.dart';
 
+import '../../../common/utils/color_types.dart';
 import '../../../generated/assets.gen.dart';
 
 class MainItemWidget extends HookConsumerWidget {
 
   final MainItemType type;
   final String title;
-  final MainItemColor color;
+  final ItemColor color;
 
   MainItemWidget({
     super.key,
@@ -69,7 +69,7 @@ class MainItemWidget extends HookConsumerWidget {
   }
 
   Widget getLeading(
-      MainItemColor colorType,
+      ItemColor colorType,
       MainItemType type,
       BuildContext context,
       ) {
@@ -102,34 +102,6 @@ class MainItemWidget extends HookConsumerWidget {
     }
   }
 
-  Color getColor(
-      MainItemColor color,
-      BuildContext context
-      ) {
-    switch (color){
-      case MainItemColor.white:
-        return context.colors.shared.white;
-      case MainItemColor.brown:
-        return context.colors.shared.brown;
-      case MainItemColor.green:
-        return context.colors.shared.green;
-      case MainItemColor.sea:
-        return context.colors.shared.sea;
-      case MainItemColor.blue:
-        return context.colors.shared.blue;
-      case MainItemColor.black:
-        return context.colors.shared.black;
-      case MainItemColor.yellow:
-        return context.colors.shared.yellow;
-      case MainItemColor.red:
-        return context.colors.shared.red;
-      case MainItemColor.pink:
-        return context.colors.shared.pink;
-      case MainItemColor.purple:
-        return context.colors.shared.purple;
-      default:
-        return context.colors.shared.white;
-    }
-  }
+
 
 }

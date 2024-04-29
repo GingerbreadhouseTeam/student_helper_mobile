@@ -1,0 +1,56 @@
+[
+  {
+    "path": "group/subjects_preview",
+    "method": "GET",
+    "statusCode": 200,
+    "data": {
+      "status": "ok",
+      "response": {
+        "list": [
+          {
+            "id": "1",
+            "control": "exam",
+            "color": "yellow",
+            "title": "МАТАН"
+          },
+          {
+            "id": "2",
+            "control": "test",
+            "color": "red",
+            "title": "ТООСХД"
+          },
+          {
+            "id": "3",
+            "control": "test",
+            "color": "green",
+            "title": "Английский"
+          },
+          {
+            "id": "4",
+            "control": "exam",
+            "color": "pink",
+            "title": "СУД"
+          },
+          {
+            "id": "5",
+            "control": "test",
+            "color": "white",
+            "title": "Философия"
+          },
+          {
+            "id": "6",
+            "control": "exam",
+            "color": "black",
+            "title": "МАД"
+          },
+          {
+            "id": "7",
+            "control": "exam",
+            "color": "red",
+            "title": "ПОТНЫЕ ЯЙЦА"
+          }
+        ]
+      }
+    }
+  }
+]

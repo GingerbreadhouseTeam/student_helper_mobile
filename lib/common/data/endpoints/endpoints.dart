@@ -9,8 +9,18 @@ Endpoints endpoints(EndpointsRef ref) {
 
 class Endpoints {
   final mainItems = _MainItems();
+  final subjectPreview = _SubjectPreview();
+  final homeworkPreview = _HomeworkPreview();
 }
 
 class _MainItems {
   final main = 'group/main';
+}
+
+class _SubjectPreview {
+  final subjects = 'group/subjects_preview';
+}
+
+class _HomeworkPreview {
+  final homeworks = 'group/homework_preview';
 }

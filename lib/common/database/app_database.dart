@@ -7,7 +7,11 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sqlite3/sqlite3.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqlite3_flutter_libs/sqlite3_flutter_libs.dart';
+import 'package:student_helper/common/database/dao/homework_preview_dao/homework_preview_dao.dart';
 import 'package:student_helper/common/database/dao/main_item_dao/main_item_dao.dart';
+import 'package:student_helper/common/database/dao/subject_preview_dao/subject_preview_dao.dart';
+import 'package:student_helper/common/database/model/homework_preview_db.dart';
+import 'package:student_helper/common/database/model/subject_preview_db.dart';
 
 import 'model/main_item_db.dart';
 
@@ -20,15 +24,19 @@ AppDatabase database(DatabaseRef ref) {
 
 @DriftDatabase(
     tables: [
-      MainItemDb
+      MainItemDb,
+      SubjectPreviewDb,
+      HomeworkPreviewDb,
     ],
     daos: [
-      MainItemDao
+      MainItemDao,
+      SubjectPreviewDao,
+      HomeworkPreviewDao,
     ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
-  final dbVersion = 1;
+  final dbVersion = 3;
 
   @override
   int get schemaVersion => dbVersion;

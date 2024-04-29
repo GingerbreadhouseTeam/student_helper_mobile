@@ -10,6 +10,7 @@ class DarkColors extends CustomColors {
     accent: const Color(0xFFC5D8D1),
     accent50: const Color(0xFF79A8B8),
     coldGrey: const Color(0xFF70858C),
+    coldDarkGrey: const Color(0xFF303F45),
     txPrimary: const Color(0xFFFFFFFF)
   );
 }

@@ -40,6 +40,7 @@ class CustomColors extends ThemeExtension<CustomColors> {
   final Color accent50;
 
   final Color coldGrey;
+  final Color coldDarkGrey;
 
   final Color txPrimary;
 
@@ -52,6 +53,7 @@ class CustomColors extends ThemeExtension<CustomColors> {
     required this.accent,
     required this.accent50,
     required this.coldGrey,
+    required this.coldDarkGrey,
     required this.txPrimary,
   });
 
@@ -63,6 +65,7 @@ class CustomColors extends ThemeExtension<CustomColors> {
     Color? accent,
     Color? accent50,
     Color? coldGrey,
+    Color? coldDarkGrey,
     Color? txPrimary
 }) {
     return CustomColors(
@@ -72,6 +75,7 @@ class CustomColors extends ThemeExtension<CustomColors> {
         accent: accent ?? this.accent,
         accent50: accent50 ?? this.accent50,
         coldGrey: coldGrey ?? this.coldGrey,
+        coldDarkGrey: coldDarkGrey ?? this.coldDarkGrey,
         txPrimary: txPrimary ?? this.txPrimary
     );
   }
@@ -89,6 +93,7 @@ class CustomColors extends ThemeExtension<CustomColors> {
         accent: Color.lerp(accent, other.accent, t)!,
         accent50: Color.lerp(accent50, other.accent50, t)!,
         coldGrey: Color.lerp(coldGrey, other.coldGrey, t)!,
+        coldDarkGrey: Color.lerp(coldDarkGrey, other.coldDarkGrey, t)!,
         txPrimary: Color.lerp(txPrimary, other.txPrimary, t)!
     );
   }

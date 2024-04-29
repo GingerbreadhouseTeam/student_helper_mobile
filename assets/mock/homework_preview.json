@@ -1,0 +1,38 @@
+[
+  {
+    "path": "group/homework_preview",
+    "method": "GET",
+    "statusCode": 200,
+    "data": {
+      "status": "ok",
+      "response": {
+        "list": [
+          {
+            "id": "1",
+            "subject_name": "МАТАН",
+            "color": "yellow",
+            "text": "Практики 1-12"
+          },
+          {
+            "id": "2",
+            "subject_name": "Английский",
+            "color": "green",
+            "text": "Пересказ топика + доклад по выбранной теме"
+          },
+          {
+            "id": "3",
+            "subject_name": "СУД",
+            "color": "pink",
+            "text": "Практики 1-6"
+          },
+          {
+            "id": "4",
+            "subject_name": "СИПИ",
+            "color": "black",
+            "text": "Добить эту грязь"
+          }
+          ]
+      }
+    }
+  }
+]
