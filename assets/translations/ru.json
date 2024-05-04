@@ -24,6 +24,32 @@
     "homeworks": "Домашние задания"
   },
   "schedule": {
-    "title": "Расписание"
+    "title": "Расписание",
+    "lec": "лек",
+    "sem": "сем",
+    "n_pair": "{} пара",
+    "date_with_week": "{} - {} неделя"
+  },
+  "month_names": {
+    "january": "Январь",
+    "february": "Февраль",
+    "march": "Март",
+    "april": "Апрель",
+    "may": "Май",
+    "june": "Июнь",
+    "july": "Июль",
+    "august": "Август",
+    "september": "Сентябрь",
+    "october": "Октябрь",
+    "november": "Ноябрь",
+    "december": "Декабрь"
+  },
+  "weekday_names": {
+    "MON": "ПН",
+    "TUE": "ВТ",
+    "WED": "СР",
+    "THU": "ЧТ",
+    "FRI": "ПТ",
+    "SAT": "СБ"
   }
 }

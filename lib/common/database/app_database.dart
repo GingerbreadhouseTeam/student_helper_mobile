@@ -9,13 +9,20 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqlite3_flutter_libs/sqlite3_flutter_libs.dart';
 import 'package:student_helper/common/database/dao/homework_preview_dao/homework_preview_dao.dart';
 import 'package:student_helper/common/database/dao/main_item_dao/main_item_dao.dart';
+import 'package:student_helper/common/database/dao/schedule_element_dao/schedule_element_dao.dart';
 import 'package:student_helper/common/database/dao/subject_preview_dao/subject_preview_dao.dart';
 import 'package:student_helper/common/database/model/homework_preview_db.dart';
+import 'package:student_helper/common/database/model/schedule_elememt.dart';
 import 'package:student_helper/common/database/model/subject_preview_db.dart';
 
 import 'model/main_item_db.dart';
 
 part 'app_database.g.dart';
+
+
+/// Класс базы данных приложения.
+/// Здесь собраны все таблицы и объекты доступа к данным (DAO) приложения
+
 
 @Riverpod(keepAlive: true)
 AppDatabase database(DatabaseRef ref) {
@@ -27,16 +34,18 @@ AppDatabase database(DatabaseRef ref) {
       MainItemDb,
       SubjectPreviewDb,
       HomeworkPreviewDb,
+      ScheduleElementDb,
     ],
     daos: [
       MainItemDao,
       SubjectPreviewDao,
       HomeworkPreviewDao,
+      ScheduleElementDao,
     ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
-  final dbVersion = 3;
+  final dbVersion = 4;
 
   @override
   int get schemaVersion => dbVersion;

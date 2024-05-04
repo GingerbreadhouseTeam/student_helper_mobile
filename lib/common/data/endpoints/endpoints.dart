@@ -11,6 +11,7 @@ class Endpoints {
   final mainItems = _MainItems();
   final subjectPreview = _SubjectPreview();
   final homeworkPreview = _HomeworkPreview();
+  final scheduleElement = _ScheduleElement();
 }
 
 class _MainItems {
@@ -23,4 +24,8 @@ class _SubjectPreview {
 
 class _HomeworkPreview {
   final homeworks = 'group/homework_preview';
+}
+
+class _ScheduleElement {
+  final schedule = 'group/schedule';
 }
