@@ -6,14 +6,22 @@ import 'package:student_helper/features/bottom_nav_bar/bottom_nav_bar_view.dart'
 import 'package:student_helper/features/main_page/main_page.dart';
 import 'package:student_helper/features/schedule_page/schedule_page.dart';
 import 'package:student_helper/features/subjects_page/subjects_page.dart';
+import 'package:student_helper/features/topic_selection/topic_selection_page.dart';
+
+import '../../features/auth/sign_in_page.dart';
 
 final appRouterProvider = Provider<AppRouter>((ref) {
-  return AppRouter();
+  return AppRouter(ref);
 });
 
 
 /// Данный класс содержит маршруты экранов приложения
 class AppRouter {
+
+  final Ref _ref;
+
+  AppRouter(this._ref);
+
   
   final auth = RouteMap(
     onUnknownRoute: (_) {
@@ -27,7 +35,7 @@ class AppRouter {
         },
         '/sign_in': (_) {
           return MaterialPage(
-              child: SignUpPage()
+              child: SignInPage()
           );
         }
       }
@@ -47,7 +55,15 @@ class AppRouter {
       },
       '/main': (_) {
         return MaterialPage(
-            child: MainPage()
+            child: MainPage(),
+        );
+      },
+      '/main/topic': (info) {
+        return MaterialPage(
+            child: TopicSelectionPage(
+                topicId: info.queryParameters['id']!,
+                title: info.queryParameters['title']!,
+            )
         );
       },
       '/subjects': (_) {

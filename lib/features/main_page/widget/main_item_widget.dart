@@ -14,55 +14,60 @@ class MainItemWidget extends HookConsumerWidget {
   final MainItemType type;
   final String title;
   final ItemColor color;
+  final VoidCallback onTap;
 
   MainItemWidget({
     super.key,
     required this.type,
     required this.title,
-    required this.color
+    required this.color,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      decoration: BoxDecoration(
-        color: context.colors.secondary,
-        borderRadius: BorderRadius.circular(12)
-      ),
-      child: Padding(
-        padding: EdgeInsets.only(
-          left: 11.w,
-          right: 10.w
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          color: context.colors.secondary,
+          borderRadius: BorderRadius.circular(12)
         ),
-        child: Stack(
-          children: [
-            Row(
-              children: [
-                getLeading(color, type, context),
-                SizedBox(width: 14.w),
-                Expanded(child: Text(
-                  title,
-                  style: context.textTheme.header2.copyWith(
-                    color: context.colors.shared.white
-                  ),
-                )),
-                SizedBox(width: 3.w),
+        child: Padding(
+          padding: EdgeInsets.only(
+            left: 11.w,
+            right: 10.w
+          ),
+          child: Stack(
+            children: [
+              Row(
+                children: [
+                  getLeading(color, type, context),
+                  SizedBox(width: 14.w),
+                  Expanded(child: Text(
+                    title,
+                    style: context.textTheme.header2.copyWith(
+                      color: context.colors.shared.white
+                    ),
+                  )),
+                  SizedBox(width: 3.w),
 
-              ],
-            ),
-            Positioned(
-                top: 10.h,
-                right: 0,
-                child: Container(
-                  width: 14.h,
-                  height: 14.h,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: getColor(color, context)
-                  ),
-                )
-            )
-          ],
+                ],
+              ),
+              Positioned(
+                  top: 10.h,
+                  right: 0,
+                  child: Container(
+                    width: 14.h,
+                    height: 14.h,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: getColor(color, context)
+                    ),
+                  )
+              )
+            ],
+          ),
         ),
       ),
     );

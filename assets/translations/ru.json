@@ -2,7 +2,8 @@
   "validation_messages": {
     "required": "Обязательное поле",
     "min_length": "Поле должно содержать минимум {} символов",
-    "email_pattern": "Почта должна находится в домене edu.mirea"
+    "email_pattern": "Почта должна находится в домене edu.mirea.ru",
+    "must_match": "Пароли должны совпадать"
   },
   "auth": {
     "sign_up": "Регистрация",
@@ -10,7 +11,15 @@
     "email": "Почта МИРЭА",
     "password": "Пароль",
     "password_confirm": "Повтор пароля",
-    "sign_in": "Вход"
+    "sign_in": "Вход",
+    "already_have_account_question": "Уже есть аккаунт? ",
+    "no_account_question": "Нет аккаунта? ",
+    "sign_in_action": "Войти",
+    "sign_up_action": "Зарегистрироваться",
+    "forgot_password_question": "Забыли пароль?",
+    "confirm": "Подтвердить",
+    "user_agreement_message": "Подтверждая введенную информацию,\nвы соглашаетесь с условиями",
+    "user_agreement": "пользовательского соглашения"
   },
   "app_name": "Помощник студента",
   "main": {

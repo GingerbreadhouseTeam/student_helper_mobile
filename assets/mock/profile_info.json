@@ -1,0 +1,17 @@
+[
+  {
+    "path": "users/profile_info",
+    "method": "GET",
+    "statusCode": 200,
+    "data": {
+      "status": "ok",
+      "response": {
+        "user_id": "228",
+        "group_id": "1337",
+        "name": "Лодырь Чманя Джокерговна",
+        "email": "chmanya.l.j@edu.mirea.ru",
+        "role": "student"
+      }
+    }
+  }
+]

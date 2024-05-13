@@ -12,6 +12,9 @@ class Endpoints {
   final subjectPreview = _SubjectPreview();
   final homeworkPreview = _HomeworkPreview();
   final scheduleElement = _ScheduleElement();
+  final auth = _Auth();
+  final profile = _Profile();
+  final topic = _Topic();
 }
 
 class _MainItems {
@@ -28,4 +31,16 @@ class _HomeworkPreview {
 
 class _ScheduleElement {
   final schedule = 'group/schedule';
+}
+
+class _Auth {
+  final signIn = 'users/sign_in';
+}
+
+class _Profile {
+  final profileInfo = 'users/profile_info';
+}
+
+class _Topic {
+  final topicElement = 'group/topic_elements';
 }

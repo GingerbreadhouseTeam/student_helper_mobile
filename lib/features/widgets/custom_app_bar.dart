@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:student_helper/common/utils/context_extensions.dart';
@@ -32,6 +33,8 @@ class CAppBar extends HookConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
+
     return AppBar(
         backgroundColor: backgroundColor ?? context.colors.tertiary,
         title: title,
@@ -42,7 +45,7 @@ class CAppBar extends HookConsumerWidget implements PreferredSizeWidget {
             onPressed: () {
               Routemaster.of(context).pop();
             },
-            icon: Assets.images.icExpandLeft.svg()
+            icon: Assets.images.icArrowRight.svg()
         )
             : null
     );

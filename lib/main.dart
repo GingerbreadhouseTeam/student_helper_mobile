@@ -6,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:student_helper/common/core/dependency_override.dart';
+import 'package:student_helper/common/domain/state/navigation/navigation_controller.dart';
 import 'package:student_helper/common/domain/state/theme/theme_controller.dart';
 import 'package:student_helper/common/navigation/router.dart';
 import 'package:student_helper/common/utils/schedule_dates_creator.dart';
@@ -36,10 +37,13 @@ class StudentHelperApp extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     final appRouter = ref.watch(appRouterProvider);
+    final navigationState = ref.watch(navigationControllerProvider);
 
     final validationMessages = {
       ValidationMessage.required: (error) =>
           LocaleKeys.validation_messages_required.tr(),
+      ValidationMessage.mustMatch: (error) =>
+          LocaleKeys.validation_messages_must_match.tr(),
       ValidationMessage.minLength: (error) =>
           LocaleKeys.validation_messages_min_length
               .tr(args: [error['requiredLength'].toString()]),
@@ -79,81 +83,100 @@ class StudentHelperApp extends HookConsumerWidget {
             final ThemeData theme = Theme.of(context).copyWith(
               canvasColor: customTheme.colors.primary,
             );
-        
-            return MaterialApp.router(
-              title: LocaleKeys.app_name.tr(),
-              localizationsDelegates: context.localizationDelegates,
-              supportedLocales: context.supportedLocales,
-              debugShowCheckedModeBanner: false,
-              locale: context.locale,
-              routerDelegate: RoutemasterDelegate(
-                  routesBuilder: (context) {
-                    return appRouter.router;
-                  }
-              ),
-              routeInformationParser: const RoutemasterParser(),
-              theme: ThemeData(
-                  useMaterial3: true,
-                  extensions: customTheme.extensions,
-                  scaffoldBackgroundColor: customTheme.colors.primary,
-                  primaryColor: customTheme.colors.txPrimary,
-                  bottomNavigationBarTheme: BottomNavigationBarThemeData(
-                    backgroundColor: customTheme.colors.tertiary,
-                  ),
-                  textTheme: theme.textTheme.apply(
-                      bodyColor: customTheme.colors.txPrimary,
-                      displayColor: customTheme.colors.txPrimary,
-                      fontFamily: GoogleFonts.roboto().fontFamily
-                  ),
-                  appBarTheme: AppBarTheme(
-                      backgroundColor: customTheme.colors.primary,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(12),
-                            bottomRight: Radius.circular(12)
+
+            return navigationState.when(
+                data: (navigation) {
+                  return MaterialApp.router(
+                    title: LocaleKeys.app_name.tr(),
+                    localizationsDelegates: context.localizationDelegates,
+                    supportedLocales: context.supportedLocales,
+                    debugShowCheckedModeBanner: false,
+                    locale: context.locale,
+                    routerDelegate: RoutemasterDelegate(
+                        routesBuilder: (context) {
+                          return switch (navigation) {
+                            Authorized() => appRouter.router,
+                            Unauthorized() => appRouter.auth,
+                          };
+                        }
+                    ),
+                    routeInformationParser: const RoutemasterParser(),
+                    theme: ThemeData(
+                        useMaterial3: true,
+                        extensions: customTheme.extensions,
+                        scaffoldBackgroundColor: customTheme.colors.primary,
+                        primaryColor: customTheme.colors.txPrimary,
+                        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+                          backgroundColor: customTheme.colors.tertiary,
+                        ),
+                        textTheme: theme.textTheme.apply(
+                            bodyColor: customTheme.colors.txPrimary,
+                            displayColor: customTheme.colors.txPrimary,
+                            fontFamily: GoogleFonts.roboto().fontFamily
+                        ),
+                        appBarTheme: AppBarTheme(
+                            backgroundColor: customTheme.colors.primary,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(12),
+                                    bottomRight: Radius.circular(12)
+                                )
+                            ),
+                            centerTitle: true,
+                            titleTextStyle: customTheme.textTheme.header1
+                        ),
+                        inputDecorationTheme: theme.inputDecorationTheme.copyWith(
+                            filled: true,
+                            isCollapsed: true,
+                            contentPadding: EdgeInsets.only(
+                                bottom: 15.h,
+                                top: 15.h,
+                                left: 12.w,
+                                right: 12.w
+                            ),
+                            hintStyle: customTheme.textTheme.mainLight.copyWith(
+                                color: customTheme.colors.accent50
+                            ),
+                            fillColor: customTheme.colors.secondary,
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: BorderRadius.circular(12)
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: const BorderRadius.all(Radius.circular(12)),
+                              borderSide: BorderSide(
+                                  color: customTheme.colors.accent
+                              ),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: const BorderRadius.all(Radius.circular(12)),
+                              borderSide: BorderSide(
+                                  color: customTheme.colors.shared.red
+                              ),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius: const BorderRadius.all(Radius.circular(12)),
+                              borderSide: BorderSide(
+                                  color: customTheme.colors.shared.red
+                              ),
+                            )
                         )
-                      ),
-                      centerTitle: true,
-                      titleTextStyle: customTheme.textTheme.header1
-                  ),
-                  inputDecorationTheme: theme.inputDecorationTheme.copyWith(
-                    filled: true,
-                    isCollapsed: true,
-                    contentPadding: EdgeInsets.only(
-                      bottom: 15.h,
-                      top: 15.h,
-                      left: 12.w,
-                      right: 12.w
                     ),
-                    hintStyle: customTheme.textTheme.mainLight.copyWith(
-                      color: customTheme.colors.accent50
-                    ),
-                    fillColor: customTheme.colors.secondary,
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(12)
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                      borderSide: BorderSide(
-                          color: customTheme.colors.accent
-                      ),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                      borderSide: BorderSide(
-                          color: customTheme.colors.shared.red
-                      ),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                      borderSide: BorderSide(
-                          color: customTheme.colors.shared.red
-                      ),
-                    )
-                  )
-              ),
+                  );
+                },
+                error: (error, stackTrace) {
+                  return const SizedBox.shrink();
+                },
+                loading: () {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
             );
+
+
+
+
           },
         ),
       ),

@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:routemaster/routemaster.dart';
 import 'package:student_helper/common/domain/state/main_item/main_item_controller.dart';
+import 'package:student_helper/common/domain/state/profile_info/profile_info_controller.dart';
 import 'package:student_helper/features/main_page/widget/main_item_widget.dart';
 import 'package:student_helper/features/widgets/empty_widget.dart';
 
@@ -17,6 +19,7 @@ class MainPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(mainItemControllerProvider);
+    final profileState = ref.watch(profileInfoControllerProvider);
 
     if (state is AsyncLoading && !state.hasValue){
       return const Center(
@@ -53,7 +56,13 @@ class MainPage extends HookConsumerWidget {
             return MainItemWidget(
                 type: state.value![index].type,
                 title: state.value![index].title,
-                color: state.value![index].color
+                color: state.value![index].color,
+                onTap: () {
+                  Routemaster.of(context).push('topic', queryParameters: {
+                    'id': "3",
+                    'title': state.value![index].title
+                  });
+                },
             );
           },
           separatorBuilder: (context, index){

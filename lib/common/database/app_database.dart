@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:drift/drift.dart';
@@ -9,11 +10,16 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqlite3_flutter_libs/sqlite3_flutter_libs.dart';
 import 'package:student_helper/common/database/dao/homework_preview_dao/homework_preview_dao.dart';
 import 'package:student_helper/common/database/dao/main_item_dao/main_item_dao.dart';
+import 'package:student_helper/common/database/dao/profile_info_dao/profile_info_dao.dart';
 import 'package:student_helper/common/database/dao/schedule_element_dao/schedule_element_dao.dart';
 import 'package:student_helper/common/database/dao/subject_preview_dao/subject_preview_dao.dart';
+import 'package:student_helper/common/database/dao/topic_selection_element_dao/topic_selection_element_dao.dart';
 import 'package:student_helper/common/database/model/homework_preview_db.dart';
+import 'package:student_helper/common/database/model/profile_info_db.dart';
 import 'package:student_helper/common/database/model/schedule_elememt.dart';
 import 'package:student_helper/common/database/model/subject_preview_db.dart';
+import 'package:student_helper/common/database/model/topic_selection_element_db.dart';
+import 'package:student_helper/common/domain/model/topic_selection_element/topic_selection_element.dart';
 
 import 'model/main_item_db.dart';
 
@@ -35,17 +41,21 @@ AppDatabase database(DatabaseRef ref) {
       SubjectPreviewDb,
       HomeworkPreviewDb,
       ScheduleElementDb,
+      ProfileInfoDb,
+      TopicSelectionElementDb,
     ],
     daos: [
       MainItemDao,
       SubjectPreviewDao,
       HomeworkPreviewDao,
       ScheduleElementDao,
+      ProfileInfoDao,
+      TopicSelectionElementDao,
     ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
-  final dbVersion = 4;
+  final dbVersion = 7;
 
   @override
   int get schemaVersion => dbVersion;
@@ -83,4 +93,21 @@ LazyDatabase _openConnection() {
 
     return NativeDatabase.createInBackground(file);
   });
+}
+
+class TopicSelectionElementConverter extends TypeConverter<List<TopicSelectionElement>, String> {
+  const TopicSelectionElementConverter();
+
+  @override
+  List<TopicSelectionElement> fromSql(String fromDb) {
+    return (jsonDecode(fromDb) as Iterable)
+        .map((e) => TopicSelectionElement.fromJson(e)).toList();
+  }
+
+  @override
+  String toSql(List<TopicSelectionElement> value) {
+    return jsonEncode(value.map((e) => e.toJson()).toList());
+  }
+
+
 }

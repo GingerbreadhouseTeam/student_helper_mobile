@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
+import 'package:student_helper/common/data/repository/auth_repository/auth_repository.dart';
 import 'package:student_helper/common/utils/context_extensions.dart';
 import 'package:student_helper/features/bottom_nav_bar/widget/bottom_nav_bar_item.dart';
 import 'package:student_helper/features/widgets/custom_app_bar.dart';
@@ -19,20 +20,28 @@ class BottomNavBarView extends HookConsumerWidget {
     final tabPage = TabPage.of(context);
 
     return Scaffold(
-      appBar: CAppBar(
-        actions: [
-          SizedBox(
-            width: 44.h,
-            height: 44.h,
-            child: Assets.images.icUser.svg(),
-          )
-        ],
-        title: Text(
+      appBar: getCanPop(context)
+        ? null
+        : CAppBar(
+          actions: [
+            InkWell(
+              onTap: () {
+                //TODO убрать эту грязь надо бы...
+                ref.read(authRepositoryProvider).logout();
+              },
+              child: SizedBox(
+                width: 44.h,
+                height: 44.h,
+                child: Assets.images.icUser.svg(),
+              ),
+            )
+          ],
+          title: Text(
             getTitle(tabPage.index),
             style: context.textTheme.header1.copyWith(
-              color: context.colors.accent
+                color: context.colors.accent
             ),
-        )
+          )
       ),
       body: TabBarView(
           physics: const NeverScrollableScrollPhysics(),
@@ -82,7 +91,18 @@ class BottomNavBarView extends HookConsumerWidget {
 
   }
 
+  bool getCanPop(BuildContext context) {
+    final canPopRoutes = ['/main/topic'];
+    final currentRoute = Routemaster.of(context).currentRoute;
+    if (canPopRoutes.contains(currentRoute.path)){
+      return true;
+    }
+    return false;
+
+  }
+
   String getTitle(index) {
+
     switch (index) {
       case 0:
         return LocaleKeys.main_title.tr();
