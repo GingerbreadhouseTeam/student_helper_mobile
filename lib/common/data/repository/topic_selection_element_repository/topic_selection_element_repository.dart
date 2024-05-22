@@ -46,8 +46,8 @@ class TopicSelectionElementRepository {
   }
 
   Stream<Topic> watch({required String id}) async* {
-    final topic = await _dao.getById(id);
-    if (topic == null) {
+    final cache = await _dao.getById(id);
+    if (cache == null) {
       await get(id: id);
     } else {
       get(id: id);

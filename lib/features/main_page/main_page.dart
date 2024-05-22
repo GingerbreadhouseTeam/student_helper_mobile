@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
+import 'package:student_helper/common/domain/model/main_item/main_item.dart';
 import 'package:student_helper/common/domain/state/main_item/main_item_controller.dart';
 import 'package:student_helper/common/domain/state/profile_info/profile_info_controller.dart';
 import 'package:student_helper/features/main_page/widget/main_item_widget.dart';
@@ -58,10 +59,24 @@ class MainPage extends HookConsumerWidget {
                 title: state.value![index].title,
                 color: state.value![index].color,
                 onTap: () {
-                  Routemaster.of(context).push('topic', queryParameters: {
-                    'id': "3",
-                    'title': state.value![index].title
-                  });
+                  print(state.value![index].type);
+
+                  switch (state.value![index].type) {
+                    case MainItemType.theme: Routemaster.of(context).push('topic', queryParameters: {
+                      'id': "3",
+                      'title': state.value![index].title
+                    });
+                    case MainItemType.order: Routemaster.of(context).push('queue', queryParameters: {
+                      'id': "3",
+                      'title': state.value![index].title
+                    });
+                    default: Routemaster.of(context).push('topic', queryParameters: {
+                      'id': "3",
+                      'title': state.value![index].title
+                    });
+                  }
+
+
                 },
             );
           },

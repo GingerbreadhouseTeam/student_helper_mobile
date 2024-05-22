@@ -189,7 +189,9 @@ class SignUpPage extends HookConsumerWidget {
                                   context: context,
                                   label: LocaleKeys.auth_confirm.tr(),
                                   isEnabled: form.valid,
-                                  onTap: () {}
+                                  onTap: () {
+                                    Routemaster.of(context).push('complete');
+                                  }
                               ),
                             ),
                             if (!isVisible)

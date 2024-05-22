@@ -30,8 +30,6 @@ class TopicSelectionElementWidget extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    print(isOwner);
-
     return Container(
       constraints: BoxConstraints(
         minHeight: 78.h

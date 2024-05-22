@@ -25,7 +25,6 @@ class SubjectPreviewWidget extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      height: 83.h,
       decoration: BoxDecoration(
         color: context.colors.secondary,
         borderRadius: BorderRadius.circular(12)
@@ -35,7 +34,7 @@ class SubjectPreviewWidget extends HookConsumerWidget {
           top: 8.h,
           left: 7.w,
           right: 10.w,
-          bottom: 10.h
+          bottom: 4.h
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -74,10 +73,10 @@ class SubjectPreviewWidget extends HookConsumerWidget {
                 )
               ],
             ),
-            SizedBox(height: 20.h),
+            SizedBox(height: 14.h),
             Text(
               title,
-              maxLines: 1,
+              maxLines: 2,
               textAlign: TextAlign.center,
               style: context.textTheme.button.copyWith(
                 color: context.colors.shared.white

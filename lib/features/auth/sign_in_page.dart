@@ -156,6 +156,9 @@ class SignInPage extends HookConsumerWidget {
                               ),
                               SizedBox(height: 16.h),
                               GestureDetector(
+                                onTap: () {
+                                  Routemaster.of(context).push('forgot_password');
+                                },
                                 child: Text(
                                   LocaleKeys.auth_forgot_password_question.tr(),
                                   style: context.textTheme.mainFat.copyWith(

@@ -19,9 +19,11 @@ import 'package:student_helper/common/database/model/profile_info_db.dart';
 import 'package:student_helper/common/database/model/schedule_elememt.dart';
 import 'package:student_helper/common/database/model/subject_preview_db.dart';
 import 'package:student_helper/common/database/model/topic_selection_element_db.dart';
+import 'package:student_helper/common/domain/model/queue_element/queue_element.dart';
 import 'package:student_helper/common/domain/model/topic_selection_element/topic_selection_element.dart';
 
 import 'model/main_item_db.dart';
+import 'model/queue_db.dart';
 
 part 'app_database.g.dart';
 
@@ -43,6 +45,7 @@ AppDatabase database(DatabaseRef ref) {
       ScheduleElementDb,
       ProfileInfoDb,
       TopicSelectionElementDb,
+      QueueDb,
     ],
     daos: [
       MainItemDao,
@@ -55,7 +58,7 @@ AppDatabase database(DatabaseRef ref) {
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
-  final dbVersion = 7;
+  final dbVersion = 8;
 
   @override
   int get schemaVersion => dbVersion;
@@ -109,5 +112,19 @@ class TopicSelectionElementConverter extends TypeConverter<List<TopicSelectionEl
     return jsonEncode(value.map((e) => e.toJson()).toList());
   }
 
+
+}
+
+class QueueElementsConverter extends TypeConverter<List<QueueElement>, String> {
+  @override
+  List<QueueElement> fromSql(String fromDb) {
+    return (jsonDecode(fromDb) as Iterable)
+        .map((e) => QueueElement.fromJson(e)).toList();
+  }
+
+  @override
+  String toSql(List<QueueElement> value) {
+    return jsonEncode(value.map((e) => e.toJson()).toList());
+  }
 
 }

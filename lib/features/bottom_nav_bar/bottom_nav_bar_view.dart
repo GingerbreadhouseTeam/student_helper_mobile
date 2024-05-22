@@ -64,21 +64,37 @@ class BottomNavBarView extends HookConsumerWidget {
                   image: Assets.images.icHome.svg(),
                   isSelected: tabPage.index == 0,
                   onTap: () {
-                    tabPage.controller.animateTo(0);
+                    if (getCanPop(context)) {
+                      Routemaster.of(context).pop();
+                      tabPage.controller.animateTo(0, duration: const Duration(seconds: 0));
+                    } else {
+
+                      tabPage.controller.animateTo(0);
+                    }
                   }
               ),
               BottomNavBarItem(
                   image: Assets.images.icBook.svg(),
                   isSelected: tabPage.index == 1,
                   onTap: () {
-                    tabPage.controller.animateTo(1);
+                    if (getCanPop(context)) {
+                      Routemaster.of(context).pop();
+                      tabPage.controller.animateTo(1, duration: const Duration(seconds: 0));
+                    } else {
+                      tabPage.controller.animateTo(1);
+                    }
                   }
               ),
               BottomNavBarItem(
                   image: Assets.images.icCalendar.svg(),
                   isSelected: tabPage.index == 2,
                   onTap: () {
-                    tabPage.controller.animateTo(2);
+                    if (getCanPop(context)) {
+                      Routemaster.of(context).pop();
+                      tabPage.controller.animateTo(2, duration: const Duration(seconds: 0));
+                    } else {
+                      tabPage.controller.animateTo(2);
+                    }
                   }
               )
             ],
@@ -92,7 +108,7 @@ class BottomNavBarView extends HookConsumerWidget {
   }
 
   bool getCanPop(BuildContext context) {
-    final canPopRoutes = ['/main/topic'];
+    final canPopRoutes = ['/main/topic', '/main/queue'];
     final currentRoute = Routemaster.of(context).currentRoute;
     if (canPopRoutes.contains(currentRoute.path)){
       return true;

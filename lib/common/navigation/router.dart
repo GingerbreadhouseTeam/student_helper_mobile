@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
+import 'package:student_helper/features/auth/forgot_password_page.dart';
+import 'package:student_helper/features/auth/sign_up_complete_page.dart';
 import 'package:student_helper/features/auth/sign_up_page.dart';
 import 'package:student_helper/features/bottom_nav_bar/bottom_nav_bar_view.dart';
 import 'package:student_helper/features/main_page/main_page.dart';
+import 'package:student_helper/features/queue_page/queue_page.dart';
 import 'package:student_helper/features/schedule_page/schedule_page.dart';
+import 'package:student_helper/features/special_thanks/special_thanks_page.dart';
 import 'package:student_helper/features/subjects_page/subjects_page.dart';
 import 'package:student_helper/features/topic_selection/topic_selection_page.dart';
 
@@ -33,9 +37,24 @@ class AppRouter {
               child: SignUpPage()
           );
         },
+        '/sign_up/complete': (_) {
+          return MaterialPage(
+              child: SignUpCompletePage()
+          );
+        },
+        '/sign_up/complete/special_thanks': (_) {
+          return MaterialPage(
+              child: SpecialThanksPage()
+          );
+        },
         '/sign_in': (_) {
           return MaterialPage(
               child: SignInPage()
+          );
+        },
+        '/sign_in/forgot_password': (_) {
+          return MaterialPage(
+              child: ForgotPasswordPage()
           );
         }
       }
@@ -62,6 +81,14 @@ class AppRouter {
         return MaterialPage(
             child: TopicSelectionPage(
                 topicId: info.queryParameters['id']!,
+                title: info.queryParameters['title']!,
+            )
+        );
+      },
+      '/main/queue': (info) {
+        return MaterialPage(
+            child: QueuePage(
+                queueId: info.queryParameters['id']!,
                 title: info.queryParameters['title']!,
             )
         );

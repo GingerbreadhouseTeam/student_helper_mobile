@@ -15,6 +15,7 @@ class Endpoints {
   final auth = _Auth();
   final profile = _Profile();
   final topic = _Topic();
+  final queue = _Queue();
 }
 
 class _MainItems {
@@ -43,4 +44,8 @@ class _Profile {
 
 class _Topic {
   final topicElement = 'group/topic_elements';
+}
+
+class _Queue {
+  final queueList = 'group/queue_list';
 }
