@@ -46,4 +46,22 @@ class ProfileInfoRepository {
 
     yield* _dao.watch();
   }
+
+}
+@riverpod
+Future<String> getGroupCodeRepository(GetGroupCodeRepositoryRef ref, String groupId) async {
+  Endpoints ep = ref.read(endpointsProvider);
+  ApiClient api = ref.read(apiClientProvider);
+
+  final response = await api.post<String>(
+      path: ep.group.code,
+      body: {
+        "groupId": groupId
+      },
+      map: (data) async {
+        if (data?['code'] == null) return "";
+        return data?['code'];
+      }
+  );
+  return response!;
 }

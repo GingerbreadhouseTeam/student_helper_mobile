@@ -33,6 +33,7 @@ final class SharedColors {
 
 class CustomColors extends ThemeExtension<CustomColors> {
   final Color primary;
+  final Color darkPrimary;
   final Color secondary;
   final Color tertiary;
 
@@ -48,6 +49,7 @@ class CustomColors extends ThemeExtension<CustomColors> {
 
   CustomColors({
     required this.primary,
+    required this.darkPrimary,
     required this.secondary,
     required this.tertiary,
     required this.accent,
@@ -60,6 +62,7 @@ class CustomColors extends ThemeExtension<CustomColors> {
   @override
   ThemeExtension<CustomColors> copyWith({
     Color? primary,
+    Color? darkPrimary,
     Color? secondary,
     Color? tertiary,
     Color? accent,
@@ -70,6 +73,7 @@ class CustomColors extends ThemeExtension<CustomColors> {
 }) {
     return CustomColors(
         primary: primary ?? this.primary,
+        darkPrimary: darkPrimary ?? this.darkPrimary,
         secondary: secondary ?? this.secondary,
         tertiary: tertiary ?? this.tertiary,
         accent: accent ?? this.accent,
@@ -88,6 +92,7 @@ class CustomColors extends ThemeExtension<CustomColors> {
 
     return CustomColors(
         primary: Color.lerp(primary, other.primary, t)!,
+        darkPrimary: Color.lerp(darkPrimary, other.darkPrimary, t)!,
         secondary: Color.lerp(secondary, other.secondary, t)!,
         tertiary: Color.lerp(tertiary, other.tertiary, t)!,
         accent: Color.lerp(accent, other.accent, t)!,

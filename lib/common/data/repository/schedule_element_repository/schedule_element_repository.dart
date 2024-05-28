@@ -26,7 +26,7 @@ class ScheduleElementRepository {
 
   Future<void> get() async {
     final items = await _api.get(
-      path: _ep.scheduleElement.schedule,
+      path: _ep.group.schedule,
       map: (data) async {
         if (data?['list'] == null) return <ScheduleElement>[];
         return (data?['list'] as Iterable).map(

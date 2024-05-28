@@ -32,6 +32,8 @@ class ProfileInfo with _$ProfileInfo {
     required String userId,
     @JsonKey(name: 'group_id')
     required String groupId,
+    @JsonKey(name: 'group_name')
+    required String groupName,
     required String name,
     required String email,
     @JsonKey(fromJson: UserRole.fromJson, toJson: UserRole.toJson)

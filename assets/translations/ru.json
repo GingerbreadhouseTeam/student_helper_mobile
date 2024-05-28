@@ -1,4 +1,6 @@
 {
+  "search": "Поиск...",
+  "confirm": "Подтвердить",
   "validation_messages": {
     "required": "Обязательное поле",
     "min_length": "Поле должно содержать минимум {} символов",
@@ -25,6 +27,24 @@
     "password_recovery": "Восстановление\nпароля",
     "enter_email_for_password_reset": "Укажите почту, на которую мы вышлем\nссылку для сброса пароля",
     "create_new_password": "Укажите почту, на которую мы вышлем ссылку для сброса пароля"
+  },
+  "profile": {
+    "title": "Профиль",
+    "student_of": "студент {}",
+    "headman_of": "староста {}",
+    "co_headman_of": "зам. старосты {}",
+    "role_management": "Управление ролями",
+    "group_settings": "Настройки группы",
+    "logout": "Выйти из аккаунта",
+    "assign_co_headman": "Назначить заместителя",
+    "demote_co_headman": "Разжаловать заместителя",
+    "retire": "Снять свои полномочия",
+    "validate_schedule": "Сопоставить расписание",
+    "look_at_unique_code": "Посмотреть уникальный код",
+    "kick_from_group": "Исключить из группы",
+    "leave_group": "Выйти из группы",
+    "co_headmen": "Заместители",
+    "participants": "Участники"
   },
   "app_name": "Помощник студента",
   "main": {

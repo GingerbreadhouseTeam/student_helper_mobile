@@ -8,31 +8,22 @@ Endpoints endpoints(EndpointsRef ref) {
 }
 
 class Endpoints {
-  final mainItems = _MainItems();
-  final subjectPreview = _SubjectPreview();
-  final homeworkPreview = _HomeworkPreview();
-  final scheduleElement = _ScheduleElement();
+  final group = _Group();
   final auth = _Auth();
   final profile = _Profile();
-  final topic = _Topic();
-  final queue = _Queue();
 }
 
-class _MainItems {
+class _Group {
   final main = 'group/main';
-}
-
-class _SubjectPreview {
-  final subjects = 'group/subjects_preview';
-}
-
-class _HomeworkPreview {
-  final homeworks = 'group/homework_preview';
-}
-
-class _ScheduleElement {
+  final subjectsPreview = 'group/subjects_preview';
+  final homeworkPreview = 'group/homework_preview';
   final schedule = 'group/schedule';
+  final topicElement = 'group/topic_elements';
+  final queueList = 'group/queue_list';
+  final participantsList = 'group/participants_list';
+  final code = 'group/code';
 }
+
 
 class _Auth {
   final signIn = 'users/sign_in';
@@ -42,10 +33,4 @@ class _Profile {
   final profileInfo = 'users/profile_info';
 }
 
-class _Topic {
-  final topicElement = 'group/topic_elements';
-}
 
-class _Queue {
-  final queueList = 'group/queue_list';
-}

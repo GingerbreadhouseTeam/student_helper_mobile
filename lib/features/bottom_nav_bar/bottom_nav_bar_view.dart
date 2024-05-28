@@ -26,8 +26,7 @@ class BottomNavBarView extends HookConsumerWidget {
           actions: [
             InkWell(
               onTap: () {
-                //TODO убрать эту грязь надо бы...
-                ref.read(authRepositoryProvider).logout();
+                Routemaster.of(context).push('profile');
               },
               child: SizedBox(
                 width: 44.h,

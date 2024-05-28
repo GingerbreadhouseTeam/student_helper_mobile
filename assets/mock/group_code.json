@@ -1,0 +1,13 @@
+[
+  {
+    "path": "group/code",
+    "method": "POST",
+    "statusCode": 200,
+    "data": {
+      "status": "ok",
+      "response": {
+        "code": "UA123"
+      }
+    }
+  }
+]

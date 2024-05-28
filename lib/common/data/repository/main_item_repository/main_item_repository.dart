@@ -29,7 +29,7 @@ class MainItemRepository {
     required int pageSize,
 }) async {
     final items = await _api.post(
-        path: _ep.mainItems.main,
+        path: _ep.group.main,
         body: {
           'page': page,
           'pageSize': pageSize

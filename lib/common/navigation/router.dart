@@ -6,6 +6,7 @@ import 'package:student_helper/features/auth/sign_up_complete_page.dart';
 import 'package:student_helper/features/auth/sign_up_page.dart';
 import 'package:student_helper/features/bottom_nav_bar/bottom_nav_bar_view.dart';
 import 'package:student_helper/features/main_page/main_page.dart';
+import 'package:student_helper/features/profile_page/profile_page.dart';
 import 'package:student_helper/features/queue_page/queue_page.dart';
 import 'package:student_helper/features/schedule_page/schedule_page.dart';
 import 'package:student_helper/features/special_thanks/special_thanks_page.dart';
@@ -101,6 +102,11 @@ class AppRouter {
       '/schedule': (_) {
         return MaterialPage(
             child: SchedulePage()
+        );
+      },
+      '/profile': (_) {
+        return MaterialPage(
+            child: ProfilePage()
         );
       }
     }

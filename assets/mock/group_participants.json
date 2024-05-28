@@ -1,0 +1,39 @@
+[
+  {
+    "path": "group/participants_list",
+    "method": "POST",
+    "statusCode": 200,
+    "data": {
+      "status": "ok",
+      "response": {
+        "list": [
+          {
+            "user_id": "0",
+            "role": "student",
+            "name": "Петухонович Аблятор Попоедович"
+          },
+          {
+            "user_id": "1",
+            "role": "co_headman",
+            "name": "Касьян Кого Чегович"
+          },
+          {
+            "user_id": "2",
+            "role": "student",
+            "name": "Тутуридзе Сюда Откудович"
+          },
+          {
+            "user_id": "3",
+            "role": "co_headman",
+            "name": "Кукарача Кокороуча Чичираличевна"
+          },
+          {
+            "user_id": "4",
+            "role": "student",
+            "name": "Шушуридзе Вадим Генадьевич"
+          }
+        ]
+      }
+    }
+  }
+]

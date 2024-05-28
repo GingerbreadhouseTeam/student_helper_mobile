@@ -8,12 +8,14 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sqlite3/sqlite3.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqlite3_flutter_libs/sqlite3_flutter_libs.dart';
+import 'package:student_helper/common/database/dao/group_participant_dao/group_participant_dao.dart';
 import 'package:student_helper/common/database/dao/homework_preview_dao/homework_preview_dao.dart';
 import 'package:student_helper/common/database/dao/main_item_dao/main_item_dao.dart';
 import 'package:student_helper/common/database/dao/profile_info_dao/profile_info_dao.dart';
 import 'package:student_helper/common/database/dao/schedule_element_dao/schedule_element_dao.dart';
 import 'package:student_helper/common/database/dao/subject_preview_dao/subject_preview_dao.dart';
 import 'package:student_helper/common/database/dao/topic_selection_element_dao/topic_selection_element_dao.dart';
+import 'package:student_helper/common/database/model/group_participant_db.dart';
 import 'package:student_helper/common/database/model/homework_preview_db.dart';
 import 'package:student_helper/common/database/model/profile_info_db.dart';
 import 'package:student_helper/common/database/model/schedule_elememt.dart';
@@ -46,6 +48,7 @@ AppDatabase database(DatabaseRef ref) {
       ProfileInfoDb,
       TopicSelectionElementDb,
       QueueDb,
+      GroupParticipantDb
     ],
     daos: [
       MainItemDao,
@@ -54,11 +57,12 @@ AppDatabase database(DatabaseRef ref) {
       ScheduleElementDao,
       ProfileInfoDao,
       TopicSelectionElementDao,
+      GroupParticipantDao
     ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
-  final dbVersion = 8;
+  final dbVersion = 9;
 
   @override
   int get schemaVersion => dbVersion;

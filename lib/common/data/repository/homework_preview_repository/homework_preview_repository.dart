@@ -27,7 +27,7 @@ class HomeworkPreviewRepository {
 
   Future<void> get() async {
     final items = await _api.get(
-        path: _ep.homeworkPreview.homeworks,
+        path: _ep.group.homeworkPreview,
         map: (data) async {
           if (data?['list'] == null) return <HomeworkPreview>[];
           return (data?['list'] as Iterable).map(

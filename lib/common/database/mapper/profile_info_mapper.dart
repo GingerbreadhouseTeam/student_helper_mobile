@@ -6,6 +6,7 @@ class ProfileInfoMapper {
     return ProfileInfo(
         userId: item.userId,
         groupId: item.groupId,
+        groupName: item.groupName,
         name: item.name,
         email: item.email,
         role: UserRole.fromJson(item.role)
@@ -16,6 +17,7 @@ class ProfileInfoMapper {
     return ProfileInfoDbData(
         userId: item.userId,
         groupId: item.groupId,
+        groupName: item.groupName,
         name: item.name,
         email: item.email,
         role: UserRole.toJson(item.role)

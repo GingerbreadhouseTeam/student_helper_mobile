@@ -5,6 +5,7 @@ class DarkColors extends CustomColors {
   DarkColors()
     : super(
     primary: const Color(0xFF013743),
+    darkPrimary: const Color(0xFF032D36),
     secondary: const Color(0xFF145166),
     tertiary: const Color(0xFF19647E),
     accent: const Color(0xFFC5D8D1),

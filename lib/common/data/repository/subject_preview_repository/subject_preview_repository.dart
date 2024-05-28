@@ -27,7 +27,7 @@ class SubjectPreviewRepository {
 
   Future<void> get() async {
     final items = await _api.get(
-        path: _ep.subjectPreview.subjects,
+        path: _ep.group.subjectsPreview,
         map: (data) async {
           if (data?['list'] == null) return <SubjectPreview>[];
           return (data?['list'] as Iterable).map(

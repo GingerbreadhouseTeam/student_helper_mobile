@@ -29,7 +29,7 @@ class QueueRepository {
     required String id
 }) async {
     final queue = await _api.post(
-        path: _ep.queue.queueList,
+        path: _ep.group.queueList,
         body: {
           'queue_id': id
         },

@@ -29,7 +29,7 @@ class TopicSelectionElementRepository {
     required String id
 }) async {
     final topic = await _api.post(
-        path: _ep.topic.topicElement,
+        path: _ep.group.topicElement,
         body: {
           'topic_id': id
         },
