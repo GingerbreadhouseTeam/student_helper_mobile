@@ -1,0 +1,30 @@
+[
+  {
+    "path": "group/subject_info",
+    "method": "POST",
+    "statusCode": 200,
+    "data": {
+      "status": "ok",
+      "response": {
+        "subject_id": "1",
+        "name": "МАТАН",
+        "control": "exam",
+        "subject_color": "yellow",
+        "seminary_teacher": "Высоцкая Анна Аркадьевна",
+        "lecture_teacher": "Митина Ольга Алексеевна",
+        "commentary": "Автомат: Нужно сдать все практики и посетить 50% лекций.\nДопуск: Пофиг, все допущены :)\nИ прочие комментарии старосты",
+        "homeworks": [
+          {
+            "homework_id": "123",
+            "title": "Практики 1-12",
+            "dadd": "2024-05-31 00:00:00.000"
+          },
+          {
+            "homework_id": "123",
+            "title": "Курсач"
+          }
+        ]
+      }
+    }
+  }
+]

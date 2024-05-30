@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:routemaster/routemaster.dart';
 import 'package:student_helper/common/domain/state/homework_preview/homework_preview_controller.dart';
+import 'package:student_helper/common/domain/state/profile_info/profile_info_controller.dart';
 import 'package:student_helper/common/domain/state/subject_preview/subject_preview_controller.dart';
 import 'package:student_helper/common/utils/context_extensions.dart';
 import 'package:student_helper/features/subjects_page/widget/homework_preview_widget.dart';
@@ -46,7 +48,11 @@ class SubjectsPage extends HookConsumerWidget {
                         return SubjectPreviewWidget(
                             control: subjects[index].control,
                             color: subjects[index].color,
-                            title: subjects[index].title
+                            title: subjects[index].title,
+                            onTap: () {
+                              Routemaster.of(context)
+                                  .push('subject_info', queryParameters: {"id": "1"});
+                            },
                         );
                       }
                   ),

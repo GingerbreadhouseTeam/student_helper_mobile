@@ -22,6 +22,7 @@ class _Group {
   final queueList = 'group/queue_list';
   final participantsList = 'group/participants_list';
   final code = 'group/code';
+  final subjectInfo = 'group/subject_info';
 }
 
 

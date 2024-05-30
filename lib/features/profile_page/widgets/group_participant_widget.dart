@@ -103,7 +103,6 @@ class GroupParticipantWidget extends HookConsumerWidget {
                       isEnabled: selectedIds.value.isNotEmpty,
                       onTap: onConfirmTap
                   ),
-                  SizedBox(height: MediaQuery.of(context).viewInsets.bottom,)
                 ],
               );
             }, form: () => searchForm,

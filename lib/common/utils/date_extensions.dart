@@ -7,6 +7,14 @@ extension DateFormatters on DateTime {
     return DateFormat('${_getFullMonthName(month)} y', locale).format(this);
   }
 
+  String getMonthDayDotMonth({String locale = 'ru_RU'}) {
+    return DateFormat('dd.MM', locale).format(this);
+  }
+
+  String getFullDateWithSlashes({String locale = 'ru_RU'}) {
+    return DateFormat('dd/MM/yyyy', locale).format(this);
+  }
+
   String _getFullMonthName(int month) {
     switch (month) {
       case 1:

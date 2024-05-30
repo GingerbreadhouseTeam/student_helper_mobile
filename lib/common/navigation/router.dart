@@ -10,6 +10,7 @@ import 'package:student_helper/features/profile_page/profile_page.dart';
 import 'package:student_helper/features/queue_page/queue_page.dart';
 import 'package:student_helper/features/schedule_page/schedule_page.dart';
 import 'package:student_helper/features/special_thanks/special_thanks_page.dart';
+import 'package:student_helper/features/subject_info_page/subject_info_page.dart';
 import 'package:student_helper/features/subjects_page/subjects_page.dart';
 import 'package:student_helper/features/topic_selection/topic_selection_page.dart';
 
@@ -97,6 +98,13 @@ class AppRouter {
       '/subjects': (_) {
         return MaterialPage(
             child: SubjectsPage()
+        );
+      },
+      '/subjects/subject_info': (info) {
+        return MaterialPage(
+            child: SubjectInfoPage(
+                subjectId: info.queryParameters['id']!
+            )
         );
       },
       '/schedule': (_) {

@@ -4,7 +4,6 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
-import 'package:student_helper/common/data/repository/auth_repository/auth_repository.dart';
 import 'package:student_helper/common/utils/context_extensions.dart';
 import 'package:student_helper/features/bottom_nav_bar/widget/bottom_nav_bar_item.dart';
 import 'package:student_helper/features/widgets/custom_app_bar.dart';
@@ -107,7 +106,7 @@ class BottomNavBarView extends HookConsumerWidget {
   }
 
   bool getCanPop(BuildContext context) {
-    final canPopRoutes = ['/main/topic', '/main/queue'];
+    final canPopRoutes = ['/main/topic', '/main/queue', '/subjects/subject_info'];
     final currentRoute = Routemaster.of(context).currentRoute;
     if (canPopRoutes.contains(currentRoute.path)){
       return true;

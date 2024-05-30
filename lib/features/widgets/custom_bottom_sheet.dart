@@ -8,10 +8,14 @@ class CBottomSheet extends HookConsumerWidget {
 
   CBottomSheet({super.key, required this.child});
 
-  static Future<dynamic> show(BuildContext context, Widget child) {
+  static Future<dynamic> show(BuildContext context, {
+    required Widget child,
+    bool? useRootNavigator
+  }) {
     return showModalBottomSheet(
         context: context,
         isScrollControlled: true,
+        useRootNavigator: useRootNavigator ?? false,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(12))
         ),
@@ -33,7 +37,7 @@ class CBottomSheet extends HookConsumerWidget {
           top: 15.h,
           right: 15.w,
           left: 15.w,
-          bottom: 15.h),
+          bottom: 15.h + MediaQuery.of(context).viewInsets.bottom),
       decoration: BoxDecoration(
         color: context.colors.tertiary,
         borderRadius: const BorderRadius.vertical(top: Radius.circular(12))

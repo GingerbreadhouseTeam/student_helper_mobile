@@ -13,15 +13,18 @@ import 'package:student_helper/common/database/dao/homework_preview_dao/homework
 import 'package:student_helper/common/database/dao/main_item_dao/main_item_dao.dart';
 import 'package:student_helper/common/database/dao/profile_info_dao/profile_info_dao.dart';
 import 'package:student_helper/common/database/dao/schedule_element_dao/schedule_element_dao.dart';
+import 'package:student_helper/common/database/dao/subject_info_dao/subject_info_dao.dart';
 import 'package:student_helper/common/database/dao/subject_preview_dao/subject_preview_dao.dart';
 import 'package:student_helper/common/database/dao/topic_selection_element_dao/topic_selection_element_dao.dart';
 import 'package:student_helper/common/database/model/group_participant_db.dart';
 import 'package:student_helper/common/database/model/homework_preview_db.dart';
 import 'package:student_helper/common/database/model/profile_info_db.dart';
 import 'package:student_helper/common/database/model/schedule_elememt.dart';
+import 'package:student_helper/common/database/model/subject_info_db.dart';
 import 'package:student_helper/common/database/model/subject_preview_db.dart';
 import 'package:student_helper/common/database/model/topic_selection_element_db.dart';
 import 'package:student_helper/common/domain/model/queue_element/queue_element.dart';
+import 'package:student_helper/common/domain/model/subject_info/subject_info.dart';
 import 'package:student_helper/common/domain/model/topic_selection_element/topic_selection_element.dart';
 
 import 'model/main_item_db.dart';
@@ -48,7 +51,8 @@ AppDatabase database(DatabaseRef ref) {
       ProfileInfoDb,
       TopicSelectionElementDb,
       QueueDb,
-      GroupParticipantDb
+      GroupParticipantDb,
+      SubjectInfoDb
     ],
     daos: [
       MainItemDao,
@@ -57,12 +61,13 @@ AppDatabase database(DatabaseRef ref) {
       ScheduleElementDao,
       ProfileInfoDao,
       TopicSelectionElementDao,
-      GroupParticipantDao
+      GroupParticipantDao,
+      SubjectInfoDao
     ])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
-  final dbVersion = 9;
+  final dbVersion = 10;
 
   @override
   int get schemaVersion => dbVersion;
@@ -128,6 +133,20 @@ class QueueElementsConverter extends TypeConverter<List<QueueElement>, String> {
 
   @override
   String toSql(List<QueueElement> value) {
+    return jsonEncode(value.map((e) => e.toJson()).toList());
+  }
+
+}
+
+class SubjectInfoHomeworkConverter extends TypeConverter<List<HomeworkMini>, String> {
+  @override
+  List<HomeworkMini> fromSql(String fromDb) {
+    return (jsonDecode(fromDb) as Iterable)
+        .map((e) => HomeworkMini.fromJson(e)).toList();
+  }
+
+  @override
+  String toSql(List<HomeworkMini> value) {
     return jsonEncode(value.map((e) => e.toJson()).toList());
   }
 

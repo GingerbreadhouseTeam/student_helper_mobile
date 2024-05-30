@@ -71,7 +71,7 @@ class ProfilePage extends HookConsumerWidget {
                           onAssignCoHeadmanTap: () {
                             CBottomSheet.show(
                                 context,
-                                GroupParticipantWidget(
+                                child:  GroupParticipantWidget(
                                     title: LocaleKeys.profile_participants.tr(),
                                     onConfirmTap: () {},
                                     groupId: profile.groupId,
@@ -81,7 +81,7 @@ class ProfilePage extends HookConsumerWidget {
                           },
                           onDemoteCoHeadmanTap: () {
                             CBottomSheet.show(context,
-                                GroupParticipantWidget(
+                                child:  GroupParticipantWidget(
                                     title: LocaleKeys.profile_co_headmen.tr(),
                                     onConfirmTap: (){},
                                     groupId: profile.groupId,
@@ -99,7 +99,7 @@ class ProfilePage extends HookConsumerWidget {
                       onWatchCodeTap: () {
                         CBottomSheet.show(
                             context,
-                            Wrap(
+                            child: Wrap(
                               children: [
                                 Builder(
                                   builder: (context) {
@@ -147,7 +147,16 @@ class ProfilePage extends HookConsumerWidget {
                             )
                         );
                       },
-                      onKickTap: () {},
+                      onKickTap: () {
+                        CBottomSheet.show(
+                            context,
+                            child:  GroupParticipantWidget(
+                            title: LocaleKeys.profile_participants.tr(),
+                        onConfirmTap: () {},
+                        groupId: profile.groupId,
+                        isCoHeadman: false
+                        ));
+                      },
                       onLeaveGroupTap: () {}
                   ),
                   SizedBox(height: 81.h),
