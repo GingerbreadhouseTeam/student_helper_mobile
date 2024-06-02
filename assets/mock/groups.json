@@ -1,0 +1,30 @@
+[
+  {
+    "path": "base/groups",
+    "method": "POST",
+    "statusCode": 200,
+    "data": {
+      "status": "ok",
+      "response": {
+        "list": [
+          {
+            "id": "1",
+            "name": "ИМБО-01-21"
+          },
+          {
+            "id": "2",
+            "name": "ИМБО-02-21"
+          },
+          {
+            "id": "3",
+            "name": "ИМБО-01-22"
+          },
+          {
+            "id": "4",
+            "name": "ИМБО-02-22"
+          }
+        ]
+      }
+    }
+  }
+]

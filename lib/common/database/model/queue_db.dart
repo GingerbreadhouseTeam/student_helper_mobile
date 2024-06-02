@@ -3,6 +3,8 @@ import 'package:student_helper/common/database/app_database.dart';
 
 class QueueDb extends Table {
   TextColumn get queueId => text()();
+  TextColumn get queueType => text()();
+  TextColumn get queueColor => text()();
 
   TextColumn get queueList => text().map(QueueElementsConverter())();
 

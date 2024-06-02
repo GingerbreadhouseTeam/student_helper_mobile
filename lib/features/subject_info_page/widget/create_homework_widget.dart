@@ -14,6 +14,7 @@ import 'package:student_helper/common/utils/color_types.dart';
 import 'package:student_helper/common/utils/context_extensions.dart';
 import 'package:student_helper/common/utils/date_extensions.dart';
 import 'package:student_helper/features/widgets/custom_buttons.dart';
+import 'package:student_helper/features/widgets/select_subject_widget.dart';
 import 'package:student_helper/generated/locale_keys.g.dart';
 
 import '../../../generated/assets.gen.dart';
@@ -44,7 +45,7 @@ class CreateHomeworkWidget extends HookConsumerWidget {
 
     final selectedSubjectPreview = useState(subjectPreview);
 
-    final subjects = useState<List<SubjectPreview>>([]);
+    final subjects = useState<List<SubjectPreview>?>([]);
 
     final tileController = useExpansionTileController();
 
@@ -53,7 +54,13 @@ class CreateHomeworkWidget extends HookConsumerWidget {
     final formValid = useState(false);
     
     if (subjectPreview == null){
-      subjects.value = ref.read(subjectPreviewControllerProvider).value!;
+      subjects.value = ref.watch(subjectPreviewControllerProvider).value;
+    }
+
+    if (subjects.value == null) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
     }
 
 
@@ -152,102 +159,18 @@ class CreateHomeworkWidget extends HookConsumerWidget {
                       ],
                     ),
                 ),
-                ExpansionTile(
-                  controller: tileController,
-                  backgroundColor: context.colors.secondary,
-                  collapsedBackgroundColor: context.colors.secondary,
-                  enabled: subjectPreview == null,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    side: BorderSide(color: context.colors.accent, width: 1.w)
-                  ),
-                  collapsedShape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12)
-                  ),
-                  title: selectedSubjectPreview.value != null
-                      ? Row(
-                    children: [
-                      Container(
-                        width: 12.h,
-                        height: 12.h,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: getColor(selectedSubjectPreview.value!.color, context)
-                        ),
-                      ),
-                      SizedBox(width: 8.w),
-                      Text(
-                        selectedSubjectPreview.value!.title,
-                        style: context.textTheme.form.copyWith(
-                            color: context.colors.accent
-                        ),
-                      )
-                    ],
-                  )
-                      : Text(
-                    LocaleKeys.subjects_subject.tr(),
-                    style: context.textTheme.mainLight.copyWith(
-                        color: context.colors.accent50
-                    ),
-
-                  ),
-                  trailing: SizedBox(
-                    width: 24.h,
-                    height: 24.h,
-                    child: Assets.images.icSelect.svg(),
-                  ),
-                  children: _createTiles(context, subjects.value, selectedSubjectPreview, tileController),
-                ),
+                SelectSubjectWidget(
+                    tileController: tileController,
+                    subjectPreview: subjectPreview,
+                    selectedSubjectPreview: selectedSubjectPreview,
+                    subjects: subjects
+                )
               ],
             )
           ],
         );
       }
     );
-  }
-
-  List<Widget> _createTiles(BuildContext context,
-      List<SubjectPreview> subjects,
-      ValueNotifier<SubjectPreview?> selected,
-      ExpansionTileController tileController
-      ) {
-    List<Widget> tiles = [];
-    for (int i = 0; i < subjects.length; i++) {
-      if(selected.value != null && selected.value!.id != subjects[i].id){
-        tiles.add(
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
-              child: GestureDetector(
-                child: Row(
-                  children: [
-                    Container(
-                      width: 12.h,
-                      height: 12.h,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: getColor(subjects[i].color, context)
-                      ),
-                    ),
-                    SizedBox(width: 8.w),
-                    Text(
-                      subjects[i].title,
-                      style: context.textTheme.button.copyWith(
-                          color: context.colors.shared.white
-                      ),
-                    )
-                  ],
-                ),
-                onTap: () {
-                  selected.value = subjects[i];
-                  tileController.collapse();
-                },
-              ),
-            )
-        );
-      }
-
-    }
-    return tiles;
   }
 
 }

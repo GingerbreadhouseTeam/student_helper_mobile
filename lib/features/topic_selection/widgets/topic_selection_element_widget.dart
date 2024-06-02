@@ -14,51 +14,57 @@ class TopicSelectionElementWidget extends HookConsumerWidget {
   final String topicTitle;
   final String? topicName;
   final bool isOwner;
+  final bool isHeadman;
   final VoidCallback? onSignTap;
-  final VoidCallback? onOwnerTap;
 
   TopicSelectionElementWidget({
     super.key,
     required this.index,
     required this.topicTitle,
     required this.isOwner,
+    required this.isHeadman,
     this.topicName,
-    this.onSignTap,
-    this.onOwnerTap,
+    this.onSignTap
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    return Container(
-      constraints: BoxConstraints(
-        minHeight: 78.h
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        color: context.colors.secondary
-      ),
-      child: Padding(
-        padding: EdgeInsets.only(left: 12.w),
-        child: IntrinsicHeight(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                index.toString(),
-                style: context.textTheme.main.copyWith(
-                  color: context.colors.shared.white
+    return InkWell(
+      borderRadius: BorderRadius.circular(12),
+      onTap: onSignTap,
+      child: Container(
+        constraints: BoxConstraints(
+          minHeight: 78.h
+        ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: !isOwner
+              ? context.colors.secondary
+              : context.colors.tertiary
+        ),
+        child: Padding(
+          padding: EdgeInsets.only(left: 12.w),
+          child: IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  index.toString(),
+                  style: context.textTheme.main.copyWith(
+                    color: context.colors.shared.white
+                  ),
                 ),
-              ),
-              SizedBox(width: 12.w),
-              Container(
-                width: 1.w,
-                color: context.colors.coldGrey,
-              ),
-              topicName == null
-                  ? Expanded(child: getUnoccupiedTopicWidget(context, topicTitle))
-                  : Expanded(child: getOccupiedTopicWidget(context, topicTitle, topicName!, isOwner))
-            ],
+                SizedBox(width: 12.w),
+                Container(
+                  width: 1.w,
+                  color: context.colors.coldGrey
+                ),
+                topicName == null
+                    ? Expanded(child: getUnoccupiedTopicWidget(context, topicTitle))
+                    : Expanded(child: getOccupiedTopicWidget(context, topicTitle, topicName!, isHeadman))
+              ],
+            ),
           ),
         ),
       ),
@@ -67,7 +73,7 @@ class TopicSelectionElementWidget extends HookConsumerWidget {
 
   Widget getUnoccupiedTopicWidget(
       BuildContext context,
-      String title
+      String title,
       ) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 21.h),
@@ -84,14 +90,6 @@ class TopicSelectionElementWidget extends HookConsumerWidget {
               ),
             ),
           ),
-          SizedBox(width: 2.w),
-          InkWell(
-            child: SizedBox(
-              height: 24.h,
-              width: 24.h,
-              child: Assets.images.icEdit.svg(),
-            ),
-          )
         ],
       ),
     );
@@ -101,7 +99,7 @@ class TopicSelectionElementWidget extends HookConsumerWidget {
       BuildContext context,
       String title,
       String name,
-      bool isOwner
+      bool isHeadman,
       ) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10.h),
@@ -139,7 +137,7 @@ class TopicSelectionElementWidget extends HookConsumerWidget {
                     )
                 ),
                 SizedBox(width: 9.w),
-                if (isOwner)
+                if (isHeadman)
                   SizedBox(
                     height: 18.h,
                     width: 18.h,

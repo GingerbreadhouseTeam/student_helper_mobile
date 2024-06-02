@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:student_helper/features/auth/forgot_password_page.dart';
+import 'package:student_helper/features/auth/select_group_page.dart';
 import 'package:student_helper/features/auth/sign_up_complete_page.dart';
 import 'package:student_helper/features/auth/sign_up_page.dart';
 import 'package:student_helper/features/bottom_nav_bar/bottom_nav_bar_view.dart';
@@ -52,6 +53,11 @@ class AppRouter {
         '/sign_in': (_) {
           return MaterialPage(
               child: SignInPage()
+          );
+        },
+        '/sign_in/select_group': (_) {
+          return MaterialPage(
+              child: SelectGroupPage()
           );
         },
         '/sign_in/forgot_password': (_) {

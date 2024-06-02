@@ -6,9 +6,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:student_helper/common/domain/model/main_item/main_item.dart';
+import 'package:student_helper/common/domain/model/profile_info/profile_info.dart';
 import 'package:student_helper/common/domain/state/main_item/main_item_controller.dart';
 import 'package:student_helper/common/domain/state/profile_info/profile_info_controller.dart';
+import 'package:student_helper/common/utils/context_extensions.dart';
+import 'package:student_helper/features/main_page/widget/create_queue_topic_widget.dart';
 import 'package:student_helper/features/main_page/widget/main_item_widget.dart';
+import 'package:student_helper/features/widgets/custom_bottom_sheet.dart';
+import 'package:student_helper/features/widgets/element_add_widget.dart';
 import 'package:student_helper/features/widgets/empty_widget.dart';
 
 import '../../generated/assets.gen.dart';
@@ -42,6 +47,45 @@ class MainPage extends HookConsumerWidget {
       );
     }
 
+    if (profileState is AsyncLoading && !profileState.hasValue){
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+    if (profileState is AsyncError && !profileState.hasValue){
+      return Center(
+        child: Text(
+            "Ошибка ${state.error}"
+        ),
+      );
+    }
+
+    if (profileState is AsyncData && profileState.hasValue && state is AsyncData && !state.hasValue) {
+      return Padding(
+        padding: EdgeInsets.symmetric(vertical: 35.h, horizontal: 25.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              LocaleKeys.main_here_you_can_find.tr(),
+              style: context.textTheme.header2.copyWith(
+                color: context.colors.shared.white
+              ),
+            ),
+            SizedBox(height: 35.h),
+            ElementAddWidget(
+                onTap: () {
+                  CBottomSheet.show(context,
+                      useRootNavigator: true,
+                      child: CreateQueueTopicWidget()
+                  );
+                }
+            )
+          ],
+        ),
+      );
+    }
+
     return RefreshIndicator(
       onRefresh: () async {
         ref.invalidate(mainItemControllerProvider);
@@ -54,6 +98,16 @@ class MainPage extends HookConsumerWidget {
             bottom: 36.h
           ),
           itemBuilder: (context, index) {
+            if (index == state.value!.length && profileState.value!.role != UserRole.student && state.value!.isNotEmpty) {
+              return ElementAddWidget(
+                  onTap: () {
+                    CBottomSheet.show(context,
+                        useRootNavigator: true,
+                        child: CreateQueueTopicWidget()
+                    );
+                  }
+              );
+            }
             return MainItemWidget(
                 type: state.value![index].type,
                 title: state.value![index].title,
@@ -83,7 +137,7 @@ class MainPage extends HookConsumerWidget {
           separatorBuilder: (context, index){
             return SizedBox(height: 20.h);
           },
-          itemCount: state.value!.length
+          itemCount: state.value!.length + 1
       ),
     );
 

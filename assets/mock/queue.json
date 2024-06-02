@@ -8,6 +8,8 @@
       "response": {
         "queue": {
           "queue_id": "3",
+          "queue_type": "cyclic",
+          "queue_color": "red",
           "list": [
             {
               "user_id": "228",

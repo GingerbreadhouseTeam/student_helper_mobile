@@ -67,7 +67,7 @@ AppDatabase database(DatabaseRef ref) {
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
-  final dbVersion = 10;
+  final dbVersion = 12;
 
   @override
   int get schemaVersion => dbVersion;

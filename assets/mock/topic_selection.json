@@ -8,6 +8,7 @@
       "response": {
         "topic": {
           "topic_id": "3",
+          "topic_color": "yellow",
           "list": [
             {
               "id": "123",

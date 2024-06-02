@@ -148,10 +148,12 @@ class SignInPage extends HookConsumerWidget {
                                   label: LocaleKeys.auth_sign_in_action.tr(),
                                   isEnabled: form.valid,
                                   onTap: () {
-                                    ref.read(signInControllerProvider.notifier).signIn(
-                                        email: form.control('email').value,
-                                        password: form.control('password').value
-                                    );
+                                    //TODO Вернуть всё как было
+                                    // ref.read(signInControllerProvider.notifier).signIn(
+                                    //     email: form.control('email').value,
+                                    //     password: form.control('password').value
+                                    // );
+                                    Routemaster.of(context).push('/sign_in/select_group');
                                   }
                               ),
                               SizedBox(height: 16.h),

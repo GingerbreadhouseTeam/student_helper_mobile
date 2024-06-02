@@ -1,6 +1,8 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../utils/color_types.dart';
+
 part 'topic_selection_element.g.dart';
 part 'topic_selection_element.freezed.dart';
 
@@ -9,6 +11,8 @@ class Topic with _$Topic {
   factory Topic({
     @JsonKey(name: "topic_id")
     required String topicId,
+    @JsonKey(name: "topic_color", toJson: ItemColor.toJson, fromJson: ItemColor.fromJson)
+    required ItemColor color,
     required List<TopicSelectionElement> topics,
 }) = _Topic;
   factory Topic.fromJson(Map<String, dynamic> json)

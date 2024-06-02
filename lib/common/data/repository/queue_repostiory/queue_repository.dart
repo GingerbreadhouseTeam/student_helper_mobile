@@ -4,6 +4,7 @@ import 'package:student_helper/common/data/endpoints/endpoints.dart';
 import 'package:student_helper/common/database/dao/queue_dao/queue_dao.dart';
 import 'package:student_helper/common/network/api_client.dart';
 import 'package:student_helper/common/network/impl/api_client_provider.dart';
+import 'package:student_helper/common/utils/color_types.dart';
 
 import '../../../domain/model/queue_element/queue_element.dart';
 
@@ -37,6 +38,8 @@ class QueueRepository {
           if (data['queue'] == null) return null;
           return Queue(
             queueId: data['queue']['queue_id'],
+            queueType: QueueType.fromJson(data['queue']['queue_type']),
+            queueColor: ItemColor.fromJson(data['queue']['queue_color']),
             queueList: (data['queue']['list'] as Iterable).map(
                     (e) => QueueElement.fromJson(e)).toList()
           );

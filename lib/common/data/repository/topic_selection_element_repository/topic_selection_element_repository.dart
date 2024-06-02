@@ -4,6 +4,7 @@ import 'package:student_helper/common/data/endpoints/endpoints.dart';
 import 'package:student_helper/common/database/dao/topic_selection_element_dao/topic_selection_element_dao.dart';
 import 'package:student_helper/common/network/api_client.dart';
 import 'package:student_helper/common/network/impl/api_client_provider.dart';
+import 'package:student_helper/common/utils/color_types.dart';
 
 import '../../../domain/model/topic_selection_element/topic_selection_element.dart';
 
@@ -37,6 +38,7 @@ class TopicSelectionElementRepository {
           if (data['topic'] == null) return null;
           return Topic(
             topicId: data['topic']['topic_id'],
+            color: ItemColor.fromJson(data['topic']['topic_color']),
             topics: (data['topic']['list'] as Iterable).map(
                     (e) => TopicSelectionElement.fromJson(e)).toList()
           );
