@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:student_helper/common/data/repository/auth_repository/auth_repository.dart';
 import 'package:student_helper/common/data/repository/profile_info_repository/profile_info_repository.dart';
+import 'package:student_helper/common/database/app_database.dart';
 import 'package:student_helper/common/domain/model/profile_info/profile_info.dart';
 import 'package:student_helper/common/domain/state/profile_info/profile_info_controller.dart';
 import 'package:student_helper/common/utils/context_extensions.dart';

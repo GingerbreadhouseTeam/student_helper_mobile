@@ -2,6 +2,7 @@ import 'package:drift/drift.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:student_helper/common/database/app_database.dart';
 import 'package:student_helper/common/database/mapper/main_item_mapper.dart';
+import 'package:student_helper/common/domain/model/queue_element/queue_element.dart';
 
 import '../../../domain/model/main_item/main_item.dart';
 import '../../model/main_item_db.dart';
@@ -26,6 +27,15 @@ class MainItemDao extends DatabaseAccessor<AppDatabase> with _$MainItemDaoMixin 
         toInsert,
         mode: InsertMode.insertOrReplace
     ));
+  }
+
+
+  Future<void> createMainItemElement(MainItem item) async {
+    await into(mainItemDb)
+        .insert(
+        mapper.toDb(item),
+        mode: InsertMode.insertOrReplace
+    );
   }
 
   Future<void> cleanUpsert(List<MainItem> items) {

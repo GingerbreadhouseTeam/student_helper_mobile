@@ -24,6 +24,10 @@ class MainItemRepository {
 
   MainItemRepository(this._ref);
 
+  Future<void> createMainItemElement(MainItem item) async {
+    await _dao.createMainItemElement(item);
+  }
+
   Future<void> get({
     required int page,
     required int pageSize,

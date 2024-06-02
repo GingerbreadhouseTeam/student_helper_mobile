@@ -69,6 +69,14 @@ class AppDatabase extends _$AppDatabase {
 
   final dbVersion = 12;
 
+  Future<void> deleteEverything() {
+    return transaction(() async {
+      for (final table in allTables) {
+        await delete(table).go();
+      }
+    });
+  }
+
   @override
   int get schemaVersion => dbVersion;
 

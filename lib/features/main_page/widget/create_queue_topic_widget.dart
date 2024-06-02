@@ -8,8 +8,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:student_helper/common/domain/model/main_item/main_item.dart';
 import 'package:student_helper/common/domain/model/queue_element/queue_element.dart';
+import 'package:student_helper/common/domain/model/topic_selection_element/topic_selection_element.dart';
+import 'package:student_helper/common/domain/state/main_item/main_item_controller.dart';
 import 'package:student_helper/common/domain/state/subject_preview/subject_preview_controller.dart';
+import 'package:student_helper/common/domain/state/topic_selection_element/topic_selection_element_controller.dart';
+import 'package:student_helper/common/utils/color_types.dart';
 import 'package:student_helper/common/utils/context_extensions.dart';
 import 'package:student_helper/features/widgets/select_subject_widget.dart';
 
@@ -217,7 +222,32 @@ class CreateQueueTopicWidget extends HookConsumerWidget {
                                 isEnabled: formValid.value && selectedSubjectPreview.value != null
                                     && ((!isTopicCreation.value && selectedQueueType.value != null) || isTopicCreation.value),
                                 label: LocaleKeys.create.tr(),
-                                onTap: () {}
+                                onTap: () {
+                                  if (isTopicCreation.value) {
+                                    ref.read(mainItemControllerProvider.notifier).addTopic(Topic(
+                                        topicId: "337",
+                                        color: selectedSubjectPreview.value!.color,
+                                        topics: []
+                                    ));
+                                  } else {
+                                    ref.read(mainItemControllerProvider.notifier).addQueue(Queue(
+                                        queueId: "338",
+                                        queueType: selectedQueueType.value ?? QueueType.sequential,
+                                        queueColor: selectedSubjectPreview.value!.color,
+                                        queueList: []
+                                    ));
+
+                                  }
+                                  ref.read(mainItemControllerProvider.notifier).createMainItemElement(MainItem(
+                                      id: isTopicCreation.value ? '337' : '338',
+                                      type: isTopicCreation.value
+                                          ? MainItemType.theme
+                                          : MainItemType.order,
+                                      title: nameControl.value,
+                                      color: selectedSubjectPreview.value!.color
+                                  ));
+                                  Navigator.of(context).pop();
+                                }
                             )
                           ],
                         ),
@@ -242,8 +272,13 @@ class CreateQueueTopicWidget extends HookConsumerWidget {
           return Text("Ошибаешься... \n и вот почему \n ${error} \n${stackTrace}");
         },
         loading: () {
-          return const Center(
-            child: CircularProgressIndicator(),
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Center(
+                child: CircularProgressIndicator(),
+              ),
+            ],
           );
         }
     );

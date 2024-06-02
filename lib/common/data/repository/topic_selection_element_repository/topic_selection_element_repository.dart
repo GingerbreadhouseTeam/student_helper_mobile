@@ -26,6 +26,43 @@ class TopicSelectionElementRepository {
 
   TopicSelectionElementRepository(this._ref);
 
+  Future<void> addTopic(Topic item) async {
+    await _dao.upsert(item);
+  }
+
+  Future<void> addTopicElement({
+    required String topicId,
+    required TopicSelectionElement toAdd
+  }) async {
+    await _dao.addTopicElement(topicId: topicId, toAdd: toAdd);
+  }
+
+  Future<void> changeContent({
+    required String topicId,
+    required String topicElementId,
+    required String newContent
+  }) async {
+    await _dao.changeContent(topicId: topicId, topicElementId: topicElementId, newContent: newContent);
+  }
+
+  Future<void> addUser({
+    required String topicId,
+    required String userId,
+    required String userName,
+    required String topicElementId
+  }) async {
+    await _dao.addUser(topicId: topicId, userId: userId, userName: userName, topicElementId: topicElementId);
+  }
+
+  Future<void> removeUser({
+    required String topicId,
+    required String userId,
+    required String topicElementId
+  }) async {
+    await _dao.removeUser(
+        topicId: topicId, userId: userId, topicElementId: topicElementId);
+  }
+
   Future<void> get({
     required String id
 }) async {

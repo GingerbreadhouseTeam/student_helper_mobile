@@ -28,5 +28,26 @@ class QueueController extends _$QueueController {
     });
 
     return stream.first;
+
   }
+
+  Future<void> addUserToQueue({
+    required String queueId,
+    required String userId,
+    required int index,
+    required String userName
+  }) async {
+    await repository.addUserToQueue(queueId: queueId, userId: userId, index: index, userName: userName);
+  }
+
+  Future<void> deleteUserFromQueue({
+    required String queueId,
+    required String userId,
+    required int index,
+    required String userName
+  }) async {
+    await repository.deleteUserFromQueue(queueId: queueId, userId: userId, index: index, userName: userName);
+  }
+
+
 }

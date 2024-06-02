@@ -6,26 +6,7 @@
     "data": {
       "status": "ok",
       "response": {
-        "list": [
-          {
-            "id": "1",
-            "type": "order",
-            "title": "Сдача английского",
-            "color": "red"
-          },
-          {
-            "id": "2",
-            "type": "order",
-            "title": "Сдача философии",
-            "color": "green"
-          },
-          {
-            "id": "3",
-            "type": "theme",
-            "title": "Курсач по МАТАНу",
-            "color": "yellow"
-          }
-        ]
+        "list": []
       }
     }
   }

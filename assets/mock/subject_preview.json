@@ -42,12 +42,6 @@
             "control": "exam",
             "color": "black",
             "title": "МАД"
-          },
-          {
-            "id": "7",
-            "control": "exam",
-            "color": "red",
-            "title": "ПОТНЫЕ ЯЙЦА"
           }
         ]
       }

@@ -27,6 +27,46 @@ class QueueDao extends DatabaseAccessor<AppDatabase> with _$QueueDaoMixin {
     );
   }
 
+  Future<void> addUserToQueue({
+    required String queueId,
+    required String userId,
+    required int index,
+    required String userName
+}) async {
+    final queue = await getById(queueId);
+    if (queue != null) {
+      final newQueue = Queue(
+          queueId: queueId,
+          queueType: queue.queueType,
+          queueColor: queue.queueColor,
+          queueList: [...queue.queueList, QueueElement(
+              userId: userId,
+              index: index,
+              userName: userName
+          )]
+      );
+      upsert(newQueue);
+    }
+  }
+
+  Future<void> deleteUserFromQueue({
+    required String queueId,
+    required String userId,
+    required int index,
+    required String userName
+  }) async {
+    final queue = await getById(queueId);
+    if (queue != null) {
+      final newQueue = Queue(
+          queueId: queueId,
+          queueType: queue.queueType,
+          queueColor: queue.queueColor,
+          queueList: queue.queueList.where((element) => element.userId != userId).toList()
+      );
+      upsert(newQueue);
+    }
+  }
+
   Future<Queue?> getById(String id) async {
     final queue = await (select(queueDb)..where((tbl) => tbl.queueId.equals(id))).getSingleOrNull();
     if (queue == null) return null;

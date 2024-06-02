@@ -177,6 +177,22 @@ class QueuePage extends HookConsumerWidget {
                           ? LocaleKeys.queue_leave_queue.tr()
                           : LocaleKeys.queue_enter_queue.tr(),
                         onTap: () {
+
+                            if (isInQueue.value) {
+                              ref.read(queueControllerProvider(queueId).notifier).deleteUserFromQueue(
+                                  queueId: queueId,
+                                  userId: profile.userId,
+                                  index: 1,
+                                  userName: profile.name
+                              );
+                            } else {
+                              ref.read(queueControllerProvider(queueId).notifier).addUserToQueue(
+                                  queueId: queueId,
+                                  userId: profile.userId,
+                                  index: 1,
+                                  userName: profile.name);
+                            }
+
                             isInQueue.value = !isInQueue.value;
                         }
                     ),

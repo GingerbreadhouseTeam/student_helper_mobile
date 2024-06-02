@@ -40,12 +40,7 @@ class MainPage extends HookConsumerWidget {
       );
     }
 
-    if (state is AsyncData && state.value!.isEmpty){
-      return EmptyWidget(
-          text: LocaleKeys.main_empty.tr(),
-          picture: Assets.images.emptyCatPng.image(),
-      );
-    }
+
 
     if (profileState is AsyncLoading && !profileState.hasValue){
       return const Center(
@@ -60,7 +55,21 @@ class MainPage extends HookConsumerWidget {
       );
     }
 
-    if (profileState is AsyncData && profileState.hasValue && state is AsyncData && !state.hasValue) {
+    if (state is AsyncData
+        && state.value!.isEmpty
+        && profileState.value!.role == UserRole.student){
+      return EmptyWidget(
+        text: LocaleKeys.main_empty.tr(),
+        picture: Assets.images.emptyCatPng.image(),
+      );
+    }
+
+    if (profileState is AsyncData
+        && profileState.hasValue
+        && profileState.value!.role != UserRole.student
+        && state is AsyncData
+        && state.value!.isEmpty
+        ) {
       return Padding(
         padding: EdgeInsets.symmetric(vertical: 35.h, horizontal: 25.w),
         child: Column(
@@ -68,6 +77,7 @@ class MainPage extends HookConsumerWidget {
           children: [
             Text(
               LocaleKeys.main_here_you_can_find.tr(),
+              textAlign: TextAlign.center,
               style: context.textTheme.header2.copyWith(
                 color: context.colors.shared.white
               ),
@@ -113,19 +123,17 @@ class MainPage extends HookConsumerWidget {
                 title: state.value![index].title,
                 color: state.value![index].color,
                 onTap: () {
-                  print(state.value![index].type);
-
                   switch (state.value![index].type) {
                     case MainItemType.theme: Routemaster.of(context).push('topic', queryParameters: {
-                      'id': "3",
+                      'id': state.value![index].id,
                       'title': state.value![index].title
                     });
                     case MainItemType.order: Routemaster.of(context).push('queue', queryParameters: {
-                      'id': "3",
+                      'id': state.value![index].id,
                       'title': state.value![index].title
                     });
                     default: Routemaster.of(context).push('topic', queryParameters: {
-                      'id': "3",
+                      'id': state.value![index].id,
                       'title': state.value![index].title
                     });
                   }

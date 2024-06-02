@@ -26,6 +26,28 @@ class QueueRepository {
 
   QueueRepository(this._ref);
 
+  Future<void> addQueue(Queue item) async {
+    await _dao.upsert(item);
+  }
+
+  Future<void> addUserToQueue({
+    required String queueId,
+    required String userId,
+    required int index,
+    required String userName
+  }) async {
+    await _dao.addUserToQueue(queueId: queueId, userId: userId, index: index, userName: userName);
+  }
+
+  Future<void> deleteUserFromQueue({
+    required String queueId,
+    required String userId,
+    required int index,
+    required String userName
+  }) async {
+    await _dao.deleteUserFromQueue(queueId: queueId, userId: userId, index: index, userName: userName);
+  }
+
   Future<void> get({
     required String id
 }) async {

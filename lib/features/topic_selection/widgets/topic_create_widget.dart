@@ -88,6 +88,7 @@ class TopicCreateEditWidget extends HookConsumerWidget {
                 isEnabled: formValid.value,
                 onTap: () {
                   onCreateTap(contentControl.value, isAssignToMe.value);
+                  Navigator.pop(context);
                 }
             )
           ],

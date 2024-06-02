@@ -6,6 +6,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:student_helper/common/domain/model/profile_info/profile_info.dart';
+import 'package:student_helper/common/domain/model/topic_selection_element/topic_selection_element.dart';
 import 'package:student_helper/common/domain/state/profile_info/profile_info_controller.dart';
 import 'package:student_helper/common/domain/state/topic_selection_element/topic_selection_element_controller.dart';
 import 'package:student_helper/common/utils/color_types.dart';
@@ -29,7 +30,8 @@ class TopicSelectionPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(topicSelectionElementControllerProvider(topicId));
-    final topicColor = useState(ItemColor.white);
+    final topicColor = useState(getColor(ItemColor.white, context));
+    final profile = ref.read(profileInfoControllerProvider).value!;
 
     return Scaffold(
       appBar: CAppBar(
@@ -44,7 +46,11 @@ class TopicSelectionPage extends HookConsumerWidget {
               child: SizedBox(
                 width: 18.w,
                 height: 50.h,
-                child: Assets.images.bookmark.svg(),
+                child: Assets.images.bookmark.svg(
+                  colorFilter: ColorFilter.mode(topicColor.value,
+                      BlendMode.srcIn
+                  )
+                ),
               ),
             )
           ],
@@ -67,6 +73,7 @@ class TopicSelectionPage extends HookConsumerWidget {
           : null,
       body: state.when(
           data: (data) {
+            topicColor.value = getColor(data.color, context);
             return ListView.separated(
               padding: EdgeInsets.only(top: 35.h, left: 25.w, right: 25.w, bottom: 5.h),
                 itemBuilder: (innerContext, index) {
@@ -78,7 +85,19 @@ class TopicSelectionPage extends HookConsumerWidget {
                             useRootNavigator: true,
                             child: TopicCreateEditWidget(
                                 onCreateTap: (String content, bool isAssignToMe) {
-
+                                  ref
+                                      .read(topicSelectionElementControllerProvider(data.topicId)
+                                      .notifier).addTopicElement(topicId: topicId, toAdd: TopicSelectionElement(
+                                      id: "228$index",
+                                      index: data.topics.length + 1,
+                                      topicName: content,
+                                      userId: isAssignToMe
+                                        ? profile.userId
+                                        : null,
+                                      userName: isAssignToMe
+                                      ? profile.name
+                                      : null
+                                  ));
                                 }
                             )
                         );
@@ -103,6 +122,31 @@ class TopicSelectionPage extends HookConsumerWidget {
                           useRootNavigator: true,
                           child: TopicEditAssignWidget(
                               onConfirmTap: (String content, bool isAssignToMe) {
+                                ref
+                                    .read(topicSelectionElementControllerProvider(data.topicId)
+                                    .notifier).changeContent(
+                                    topicId: topicId,
+                                    topicElementId: data.topics[index].id,
+                                    newContent: content
+                                );
+                                if (isOwned && !isAssignToMe){
+                                  ref
+                                      .read(topicSelectionElementControllerProvider(data.topicId).notifier).removeUser(
+                                      topicId: topicId,
+                                      userId: profile.userId,
+                                      topicElementId: data.topics[index].id
+                                  );
+                                }
+                                if ((data.topics[index].userName == null) && !isOwned && isAssignToMe) {
+                                  ref
+                                      .read(topicSelectionElementControllerProvider(data.topicId).notifier)
+                                      .addUser(
+                                      topicId: topicId,
+                                      userId: profile.userId,
+                                      userName: profile.name,
+                                      topicElementId: data.topics[index].id
+                                  );
+                                }
                               },
                               initialValue: data.topics[index].topicName,
                               isOwned: isOwned,

@@ -55,7 +55,7 @@ class TopicEditAssignWidget extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                LocaleKeys.topic_new.tr(),
+                LocaleKeys.topic_edit.tr(),
                 style: context.textTheme.header2.copyWith(
                     color: context.colors.shared.white
                 ),
@@ -100,6 +100,7 @@ class TopicEditAssignWidget extends HookConsumerWidget {
                   isEnabled: formValid.value,
                   onTap: () {
                     onConfirmTap(contentControl.value!, isAssignToMe.value);
+                    Navigator.pop(context);
                   }
               )
             ],

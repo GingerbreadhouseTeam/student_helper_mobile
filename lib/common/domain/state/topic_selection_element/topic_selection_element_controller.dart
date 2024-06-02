@@ -26,4 +26,38 @@ class TopicSelectionElementController extends _$TopicSelectionElementController 
 
     return stream.first;
   }
+
+  Future<void> addTopicElement({
+    required String topicId,
+    required TopicSelectionElement toAdd
+  }) async {
+    await _repository.addTopicElement(topicId: topicId, toAdd: toAdd);
+  }
+
+  Future<void> changeContent({
+    required String topicId,
+    required String topicElementId,
+    required String newContent
+  }) async {
+    await _repository.changeContent(topicId: topicId, topicElementId: topicElementId, newContent: newContent);
+  }
+
+  Future<void> addUser({
+    required String topicId,
+    required String userId,
+    required String userName,
+    required String topicElementId
+  }) async {
+    await _repository.addUser(topicId: topicId, userId: userId, userName: userName, topicElementId: topicElementId);
+  }
+
+  Future<void> removeUser({
+    required String topicId,
+    required String userId,
+    required String topicElementId
+  }) async {
+    await _repository.removeUser(topicId: topicId, userId: userId, topicElementId: topicElementId);
+  }
+
+
 }
